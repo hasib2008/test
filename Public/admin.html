@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Storm's Species - Admin Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="images/FaviconPawprint.png">
+</head>
+<body>
+
+    <header>
+        <img src="images/logo.jpg" alt="Site Logo" id="site-logo">
+        <h1>Adoption Requests & Load Pets</h1>
+    </header>
+
+    <!-- LOGIN SCREEN: shown until the correct password is entered -->
+    <div id="login-screen">
+        <div class="login-box">
+            <h2>Admin Login</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="admin-password">Password:</label>
+                    <input type="password" id="admin-password" placeholder="Enter admin password admin123" required>
+                </div>
+                <button type="submit">Log In</button>
+                <p id="login-error">Incorrect password. Please try again.</p>
+            </form>
+            <p class="nav-link"><a href="index.html">← Back to Home Page</a></p>
+        </div>
+    </div>
+
+    <!-- ADMIN CONTENT: hidden until login succeeds -->
+    <main id="admin-content" style="display: none;">
+        <div class="admin-container">
+
+            <p class="nav-link" style="text-align: right;">
+                <a href="#" id="logout-link">Log Out</a>
+            </p>
+
+            <!-- SECTION 1: INCOMING ADOPTION APPLICATIONS TABLE -->
+            <h2>Incoming Applications</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Application ID</th>
+                        <th>Animal Name</th>
+                        <th>First Name</th>
+                        <th>Surname</th>
+                        <th>City</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="requests-table-body">
+                    <tr>
+                        <td colspan="9">Loading adoption requests...</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- SECTION 2: MANAGE EXISTING PETS (DELETE) -->
+            <h2>Manage Pets</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Photo</th>
+                        <th>Name</th>
+                        <th>Species</th>
+                        <th>Breed</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="pets-table-body">
+                    <tr>
+                        <td colspan="8">Loading pets...</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- SECTION 3: DYNAMIC UPLOAD NEW PET PROFILE -->
+            <div class="add-pet-section">
+                <h2>Upload a new pet</h2>
+                <form id="pet-upload-form">
+                    <div class="form-group">
+                        <label for="pet-name">Pet Name:</label>
+                        <input type="text" id="pet-name" placeholder="e.g. Max" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pet-species">Species:</label>
+                        <select id="pet-species" required>
+                            <option value="">-- Select Species --</option>
+                            <option value="Dog">Dog</option>
+                            <option value="Cat">Cat</option>
+                            <option value="Bird">Bird</option>
+                            <option value="Horse">Horse</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pet-breed">Breed:</label>
+                        <input type="text" id="pet-breed" placeholder="e.g. Husky, Great Dane, Ginger" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pet-age">Age (years):</label>
+                        <input type="number" id="pet-age" min="0" placeholder="e.g. 2" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pet-gender">Gender:</label>
+                        <select id="pet-gender" required>
+                            <option value="">-- Select Gender --</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pet-description">Description:</label>
+                        <textarea id="pet-description" placeholder="e.g. Describe the animal" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pet-photo">Pet Photo:</label>
+                        <input type="file" id="pet-photo" accept="image/*" required>
+                    </div>
+
+                    <button type="submit" class="submit-pet-btn">Upload</button>
+                </form>
+            </div>
+
+            <p class="nav-link">
+                <a href="index.html">← Go to Home Page</a>
+            </p>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

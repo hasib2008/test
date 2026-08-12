@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Storm's Species - Available Pets</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="images/FaviconPawprint.png">
+</head>
+<body>
+
+    <header>
+        <img src="images/logo.jpg" alt="Site Logo" id="site-logo">
+        <h1>Available Pets for Adoption</h1>
+        <!-- Admin Dashboard Access Navigation Link -->
+        <p class="nav-link"><a href="admin.html">Manage App (Admin Dashboard) →</a></p>
+    </header>
+
+    <main>
+        <!-- Species Search Dropdown -->
+        <div class="search-bar">
+            <label for="species-search">Filter by species:</label>
+            <select id="species-search">
+                <option value="">All Species</option>
+                <option value="Dog">Dog</option>
+                <option value="Cat">Cat</option>
+                <option value="Bird">Bird</option>
+                <option value="Horse">Horse</option>
+            </select>
+        </div>
+
+        <!-- The frontend script will inject matching grid cards right inside this box -->
+        <div id="pets-container"></div>
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

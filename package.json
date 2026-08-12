@@ -1,0 +1,27 @@
+{
+  "name": "storm's-species-website",
+  "version": "1.0.0",
+  "description": "Storm’s Species is a pet adoption platform designed to connect people with stray animals in need of loving homes. The project supports the principle of **“Adopt, don’t Shop”**, aiming to reduce euthanasia rates in shelters and give strays a second chance.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SamStormT/StormsSpecies-AdoptionSystem.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/SamStormT/StormsSpecies-AdoptionSystem/issues"
+  },
+  "homepage": "https://github.com/SamStormT/StormsSpecies-AdoptionSystem#readme",
+  "dependencies": {
+    "body-parser": "^2.3.0",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "sqlite3": "^6.0.1"
+  }
+}
