@@ -1,11 +1,11 @@
-const { getStore } = require("@netlify/blobs");
-const seed = require("../data/seed.json");
+import { getStore } from "@netlify/blobs";
+import seed from "../data/seed.json" with { type: "json" };
 
 function store() {
     return getStore("animal-db");
 }
 
-async function getPets() {
+export async function getPets() {
     const s = store();
     let pets = await s.get("pets", { type: "json" });
     if (!pets) {
@@ -15,11 +15,11 @@ async function getPets() {
     return pets;
 }
 
-async function savePets(pets) {
+export async function savePets(pets) {
     await store().setJSON("pets", pets);
 }
 
-async function getAdoptions() {
+export async function getAdoptions() {
     const s = store();
     let adoptions = await s.get("adoptions", { type: "json" });
     if (!adoptions) {
@@ -29,8 +29,6 @@ async function getAdoptions() {
     return adoptions;
 }
 
-async function saveAdoptions(adoptions) {
+export async function saveAdoptions(adoptions) {
     await store().setJSON("adoptions", adoptions);
 }
-
-module.exports = { getPets, savePets, getAdoptions, saveAdoptions };

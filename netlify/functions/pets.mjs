@@ -1,17 +1,18 @@
-const { getPets, savePets, getAdoptions, saveAdoptions } = require("./_lib/store");
+import { getPets, savePets, getAdoptions, saveAdoptions } from "./_lib/store.mjs";
 
-function getId(event) {
-    const rest = event.path.replace(/^.*\/pets\/?/, "");
-    return rest || null;
+function json(status, body) {
+    return new Response(JSON.stringify(body), { status, headers: { "Content-Type": "application/json" } });
 }
 
-function json(statusCode, body) {
-    return { statusCode, headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) };
+function getId(req) {
+    const parts = new URL(req.url).pathname.split("/").filter(Boolean);
+    const last = parts[parts.length - 1];
+    return last === "pets" ? null : last;
 }
 
-exports.handler = async (event) => {
+export default async (req) => {
     try {
-        if (event.httpMethod === "GET") {
+        if (req.method === "GET") {
             const [pets, adoptions] = await Promise.all([getPets(), getAdoptions()]);
             const withPending = pets.map((p) => ({
                 ...p,
@@ -20,8 +21,8 @@ exports.handler = async (event) => {
             return json(200, withPending);
         }
 
-        if (event.httpMethod === "POST") {
-            const { Name, Species, Breed, Age, Gender, Description, PhotoUrl } = JSON.parse(event.body || "{}");
+        if (req.method === "POST") {
+            const { Name, Species, Breed, Age, Gender, Description, PhotoUrl } = await req.json();
             if (!Name || !Species || !Gender) {
                 return json(400, { error: "Name, Species, and Gender are required." });
             }
@@ -38,9 +39,9 @@ exports.handler = async (event) => {
             return json(201, { message: "Pet added successfully!", PetId });
         }
 
-        if (event.httpMethod === "PUT") {
-            const id = Number(getId(event));
-            const { Available } = JSON.parse(event.body || "{}");
+        if (req.method === "PUT") {
+            const id = Number(getId(req));
+            const { Available } = await req.json();
             const pets = await getPets();
             const pet = pets.find((p) => p.PetId === id);
             if (!pet) return json(404, { message: "Pet not found." });
@@ -49,8 +50,8 @@ exports.handler = async (event) => {
             return json(200, { message: `Pet ${id} updated.` });
         }
 
-        if (event.httpMethod === "DELETE") {
-            const id = Number(getId(event));
+        if (req.method === "DELETE") {
+            const id = Number(getId(req));
             const pets = await getPets();
             const idx = pets.findIndex((p) => p.PetId === id);
             if (idx === -1) return json(404, { message: "Pet not found." });
@@ -68,3 +69,5 @@ exports.handler = async (event) => {
         return json(500, { error: err.message });
     }
 };
+
+export const config = { path: ["/api/pets", "/api/pets/:id"] };
