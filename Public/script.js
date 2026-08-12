@@ -1,5 +1,5 @@
-const API_URL = "http://localhost:3000/api/adoptions";
-const PETS_URL = "http://localhost:3000/api/pets";
+const API_URL = "/api/adoptions";
+const PETS_URL = "/api/pets";
 
 const ADMIN_PASSWORD ="admin123";
 
