@@ -10,7 +10,7 @@ app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 app.use(express.static(path.join(__dirname, "public")));
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Connect to SQLite database
 const db = new sqlite3.Database("./animal.db", (err) => {

@@ -170,7 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
             };
 
-            let PhotoUrl = "Images/FaviconPawprint.png";
+            let PhotoUrl = "images/FaviconPawprint.png";
 
             try {
                 if (fileInput && fileInput.files.length > 0) {
